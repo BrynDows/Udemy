@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Required meta tags -->
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	<h1 th:text="${titulo}"></h1>
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Nombre</th>
+			<th>edad</th>
+			<th>Fecha Nacimeinto</th>
+		</tr>
+		<!-- Se llamará a los ggeters de la clase C -->
+		<tr th:each="c : ${clientes}">
+			<td th:text="${c.id}"></td>
+			<td th:text="${c.nombre}"></td>
+			<td th:text="${c.edad}"></td>
+			<td th:text="${c.fecAlta}"></td>
+		</tr>
+	</table>
+
+
+</body>
+</html>
