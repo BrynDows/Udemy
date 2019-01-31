@@ -14,23 +14,14 @@
 <body>
 	<div class="container">
 		<h1 class="well " th:text="${titulo}"></h1>
-		<div class="table-wrapper-scroll-y">
-			<table class="table table-striped">
-				<tr>
-					<th>Id</th>
-					<th>Nombre</th>
-					<th>edad</th>
-					<th>Fecha Nacimeinto</th>
-				</tr>
-				<!-- Se llamará a los ggeters de la clase C -->
-				<tr th:each="c : ${clientes}">
-					<td th:text="${c.id}"></td>
-					<td th:text="${c.nombre}"></td>
-					<td th:text="${c.edad}"></td>
-					<td th:text="${c.fecAlta}"></td>
-				</tr>
+		<form th:action="@{insertar}" th:object="${Cliente}" method="post">
+			<table>
+				<tr>Id <input type="text" th:fi /> </tr>
+				<tr>Edad</tr>
+				<tr>Fecha nacimiento</tr>
+				<tr>Nombre:</tr>
 			</table>
-		</div>
+		</form>
 	</div>
 </body>
 </html>

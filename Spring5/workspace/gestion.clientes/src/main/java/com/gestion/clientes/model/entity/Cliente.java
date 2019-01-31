@@ -22,7 +22,7 @@ import lombok.Data;
  */
 @Data
 @Entity // Indicamos al motor de Persitencia de BD que esta es una clase de persistencia
-@Table(name="CLIENTES", schema="gestionClientes") // Indicamos que es una tabla
+@Table(name="CLIENTES"/*, schema="gestionClientes"*/) // Indicamos que es una tabla
 public class Cliente implements Serializable {
 	
 	/**  */
@@ -37,7 +37,7 @@ public class Cliente implements Serializable {
 	private int edad;
 
 	@Column(name="fecha_nacimiento") //indicamos el nombre del campo de la tabla
-	@Temporal(TemporalType.TIMESTAMP) // se convertirá automáticamente a timeStamp
+	@Temporal(TemporalType.DATE) // se convertirá automáticamente a timeStamp
 	private Date fecAlta;
 
 	

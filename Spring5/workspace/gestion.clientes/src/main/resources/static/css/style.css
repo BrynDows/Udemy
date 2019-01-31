@@ -1,9 +1,16 @@
 @charset "UTF-8";
 
-h3{
+.h3{
 	color:red;
 }
 
-h2{
+.h2{
 	color:blue;
+}
+
+.table-wrapper-scroll-y {
+display: block;
+max-height: 200px;
+overflow-y: auto;
+-ms-overflow-style: -ms-autohiding-scrollbar;
 }

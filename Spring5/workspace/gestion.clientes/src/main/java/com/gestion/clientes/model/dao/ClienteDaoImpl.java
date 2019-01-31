@@ -34,4 +34,42 @@ public class ClienteDaoImpl implements IClienteDao {
 		return terminal.createQuery("from Cliente").getResultList();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.gestion.clientes.model.dao.IClienteDao#insertar(com.gestion.clientes.model.entity.Cliente)
+	 */
+	@Override
+	@Transactional
+	public void insertar(Cliente cliente) {
+		terminal.persist(cliente);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gestion.clientes.model.dao.IClienteDao#actualizar(com.gestion.clientes.model.entity.Cliente)
+	 */
+	@Override
+	@Transactional
+	public void actualizar(Cliente cliente) {
+		terminal.merge(cliente);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gestion.clientes.model.dao.IClienteDao#eliminar(com.gestion.clientes.model.entity.Cliente)
+	 */
+	@Override
+	@Transactional
+	public void eliminar(Cliente cliente) {
+		terminal.remove(cliente);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.gestion.clientes.model.dao.IClienteDao#consultarPK(long)
+	 */
+//	@Override
+//	@Transactional
+//	public Cliente consultarPK(long pk) {
+//		// TODO Auto-generated method stub
+//		return terminal.createQuery("from Cliente where id="+pk).getre;
+//	}
+
+
 }
