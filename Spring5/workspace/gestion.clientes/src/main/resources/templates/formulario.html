@@ -16,10 +16,21 @@
 		<h1 class="well " th:text="${titulo}"></h1>
 		<form th:action="@{insertar}" th:object="${Cliente}" method="post">
 			<table>
-				<tr>Id <input type="text" th:fi /> </tr>
-				<tr>Edad</tr>
-				<tr>Fecha nacimiento</tr>
-				<tr>Nombre:</tr>
+				<tr>
+					<td>Id</td>
+				</tr>
+				<tr>
+					<td>Edad</td>
+					<td><input type="text" th:field="$edad{}"></td>
+				</tr>
+				<tr>
+					<td>Fecha nacimiento</td>
+					<td><input type="text" th:field="${apellido}"></td>
+				</tr>
+				<tr>
+					<td>Nombre:</td>
+					<td><input type="text" th:field="${apellido}"></td>
+				</tr>
 			</table>
 		</form>
 	</div>
