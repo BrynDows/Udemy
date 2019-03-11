@@ -4,56 +4,68 @@
 package com.gestion.clientes.model.dao;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gestion.clientes.model.entity.Cliente;
 
-/** Clase de acceso a datos
+/**
+ * Clase de acceso a datos
  * 
- * @author bgtiban */
+ * @author bgtiban
+ */
 
-/* es un estereotipo de la clase component y se indica que es un
- * componente de persistencia de acceso a datos */
+/*
+ * es un estereotipo de la clase component y se indica que es un componente de
+ * persistencia de acceso a datos
+ */
 @Repository("clienteJPA")
 public class ClienteDaoImpl implements IClienteDao {
 
 	@PersistenceContext
 	private EntityManager terminal; // Clase de acceso a persistencia a datos
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @see com.gestion.clientes.model.dao.IClienteDao#selectAll() */
+	 * @see com.gestion.clientes.model.dao.IClienteDao#selectAll()
+	 */
 
 	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public List<Cliente> listar() {
 		/* En la query se indica el nombre de la clase, ya que está mapeada */
 		return terminal.createQuery("from Cliente").getResultList();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gestion.clientes.model.dao.IClienteDao#insertar(com.gestion.clientes.model.entity.Cliente)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gestion.clientes.model.dao.IClienteDao#insertar(com.gestion.clientes.
+	 * model.entity.Cliente)
 	 */
 	@Override
 	@Transactional
-	public void insertar(Cliente cliente) {
-		terminal.persist(cliente);
+	public void insertarActualizar(Cliente cliente) {
+		if(cliente.getId()>0) {
+			terminal.merge(cliente);
+		}else {
+			terminal.persist(cliente);
+		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.gestion.clientes.model.dao.IClienteDao#actualizar(com.gestion.clientes.model.entity.Cliente)
-	 */
-	@Override
-	@Transactional
-	public void actualizar(Cliente cliente) {
-		terminal.merge(cliente);
-	}
-
-	/* (non-Javadoc)
-	 * @see com.gestion.clientes.model.dao.IClienteDao#eliminar(com.gestion.clientes.model.entity.Cliente)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.gestion.clientes.model.dao.IClienteDao#eliminar(com.gestion.clientes.
+	 * model.entity.Cliente)
 	 */
 	@Override
 	@Transactional
@@ -61,7 +73,15 @@ public class ClienteDaoImpl implements IClienteDao {
 		terminal.remove(cliente);
 	}
 
-	/* (non-Javadoc)
+	@Override
+	@Transactional(readOnly = true)
+	public Cliente listarUno(long id) {
+		return terminal.find(Cliente.class, id);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.gestion.clientes.model.dao.IClienteDao#consultarPK(long)
 	 */
 //	@Override
@@ -70,6 +90,5 @@ public class ClienteDaoImpl implements IClienteDao {
 //		// TODO Auto-generated method stub
 //		return terminal.createQuery("from Cliente where id="+pk).getre;
 //	}
-
 
 }

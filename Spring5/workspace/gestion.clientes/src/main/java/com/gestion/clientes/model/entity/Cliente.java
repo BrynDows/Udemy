@@ -10,9 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 
@@ -30,17 +36,28 @@ public class Cliente implements Serializable {
 	
 	@Id //mapeamos el id
 	@GeneratedValue(strategy= GenerationType.IDENTITY) //indcamos que el id es autoincremental
-	private Long id;
+	private long id;
 
+	@NotEmpty
 	private String nombre;
 
-	private int edad;
+	@NotEmpty
+	private String apellido;
 
+	@NotNull
+	@DateTimeFormat(pattern="dd/mm/yyyy")
 	@Column(name="fecha_nacimiento") //indicamos el nombre del campo de la tabla
 	@Temporal(TemporalType.DATE) // se convertirá automáticamente a timeStamp
-	private Date fecAlta;
-
+	private Date fecNac;
 	
+	@Column(name="fecha_alta")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecAlta;
+	
+	@PrePersist
+	public void prePersist() {
+		fecAlta = new Date();
+	}
 
 	
 }

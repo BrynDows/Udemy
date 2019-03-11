@@ -5,8 +5,7 @@
 <meta charset="UTF-8" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 
 <title th:text="${titulo}"></title>
@@ -15,23 +14,30 @@
 	<div class="container">
 		<h1 class="well " th:text="${titulo}"></h1>
 		<form th:action="@{insertar}" th:object="${Cliente}" method="post">
-			<table>
-				<tr>
-					<td>Id</td>
-				</tr>
-				<tr>
-					<td>Edad</td>
-					<td><input type="text" th:field="$edad{}"></td>
-				</tr>
-				<tr>
-					<td>Fecha nacimiento</td>
-					<td><input type="text" th:field="${apellido}"></td>
-				</tr>
-				<tr>
-					<td>Nombre:</td>
-					<td><input type="text" th:field="${apellido}"></td>
-				</tr>
-			</table>
+			<input type="hidden" th:field="*{id}" />
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label for="label_nombre" class="col-form-label">Nombre</label> <input type="text"
+						class="form-control " id="input_id" placeholder="Inserte su nombre" th:field="*{nombre}">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+						th:errors="*{nombre}"></small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label for="label_id">Apellido</label> <input type="text" class="form-control" id="input_id"
+						placeholder="Inserte su apellido" th:field="*{apellido}"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-3">
+					<label for="label_id">Fecha Nacimeinto</label> <input type="text" class="form-control"
+						id="input_id" placeholder="¿Cuándo nació?" th:field="*{fecNac}"> <small
+						class="form-text text-danger" th:if="${#fields.hasErrors('fecNac')}" th:errors="*{fecNac}"></small>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary btn-lg btn-block">Añadir Cliente</button>
 		</form>
 	</div>
 </body>
