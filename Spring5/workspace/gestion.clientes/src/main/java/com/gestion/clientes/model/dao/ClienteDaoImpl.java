@@ -54,7 +54,7 @@ public class ClienteDaoImpl implements IClienteDao {
 	@Transactional
 	public void insertarActualizar(Cliente cliente) {
 		if(cliente.getId()>0) {
-			terminal.merge(cliente);
+			terminal.merge(cliente).prePersist();
 		}else {
 			terminal.persist(cliente);
 		}
@@ -69,8 +69,8 @@ public class ClienteDaoImpl implements IClienteDao {
 	 */
 	@Override
 	@Transactional
-	public void eliminar(Cliente cliente) {
-		terminal.remove(cliente);
+	public void eliminar(Long id) {
+		terminal.remove(listarUno(id));
 	}
 
 	@Override
@@ -78,17 +78,5 @@ public class ClienteDaoImpl implements IClienteDao {
 	public Cliente listarUno(long id) {
 		return terminal.find(Cliente.class, id);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.gestion.clientes.model.dao.IClienteDao#consultarPK(long)
-	 */
-//	@Override
-//	@Transactional
-//	public Cliente consultarPK(long pk) {
-//		// TODO Auto-generated method stub
-//		return terminal.createQuery("from Cliente where id="+pk).getre;
-//	}
 
 }

@@ -4,16 +4,26 @@
 <!-- Required meta tags -->
 <meta charset="UTF-8" />
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 
 <title th:text="${titulo}"></title>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><a th:href="@{/formulario}">Formulario</a></li>
+      <li><a th:href="@{/listar}">Listado</a></li>
+    </ul>
+  </div>
+</nav>
 	<div class="container">
 		<h1 class="well " th:text="${titulo}"></h1>
-		<!-- 		<div class="table-wrapper-scroll-y"> -->
+<!-- 		<div class="table-responsive table-wrapper-scroll-y"> -->
+		<div class="table-responsive">
 		<table class="table table-striped">
 			<tr>
 				<th>Id</th>
@@ -30,10 +40,13 @@
 				<td th:text="${c.apellido}" />
 				<td th:text="${c.fecNac}" />
 				<td th:text="${c.fecAlta}" />
-				<td><a th:href="@{/formulario/} + ${c.id}" class="btn btn-success">Editar</a></td>
+				<td>
+					<a th:href="@{/eliminar/} + ${c.id}" class="btn btn-danger" th:method="delete">Eliminar</a>
+					<a th:href="@{/formulario/} + ${c.id}" class="btn btn-success" th:text="Modificar"></a>
+				</td>
 			</tr>
 		</table>
-		<!-- 		</div> -->
+		</div>
 	</div>
 </body>
 </html>

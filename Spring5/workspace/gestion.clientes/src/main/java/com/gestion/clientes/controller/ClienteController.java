@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gestion.clientes.model.dao.IClienteDao;
 import com.gestion.clientes.model.entity.Cliente;
@@ -42,10 +41,10 @@ public class ClienteController {
 		model.addAttribute("titulo", "Listado Clientes");
 		model.addAttribute("clientes", clienteDao.listar());
 
-		return "listar"; // Se indica la vista a mostrar.
+		return "/listar"; // Se indica la vista a mostrar.
 	}
 
-	@GetMapping("/formulario")
+	@GetMapping(value = { "/", "/formulario" })
 	public String formulario(Model model) {
 		Cliente cliente = new Cliente();
 		model.addAttribute("Cliente", cliente);
@@ -55,18 +54,18 @@ public class ClienteController {
 	}
 
 	@PostMapping(value = "/insertar")
-	public String insertar(@Valid Cliente cliente, BindingResult result) {
+	public String guardar(@Valid Cliente cliente, BindingResult result) {
 		String pantalla = "/formulario";
 		if (!result.hasErrors()) {
 			clienteDao.insertarActualizar(cliente);
-			pantalla = "redirect:listar";
+			pantalla = "redirect:/listar";
 		}
 		return pantalla;
 	}
 
 	@GetMapping(value = "/formulario/{id}")
 	public String editar(@PathVariable("id") long id, Model model) {
-		String pantalla = "redirect:listar";
+		String pantalla = "redirect:/listar";
 
 		if (id > 0) {
 			Cliente cliente = clienteDao.listarUno(id);
@@ -76,7 +75,17 @@ public class ClienteController {
 		}
 
 		return pantalla;
-
+	}
+	
+	@GetMapping(value="/eliminar/{id}")
+	public String eliminar(@PathVariable("id") long id) {
+		String pantalla = "redirect:/listar";
+		
+		if(id>0) {
+			clienteDao.eliminar(id);
+		}
+		
+		return pantalla;
 	}
 
 }

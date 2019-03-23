@@ -15,7 +15,7 @@ public interface IClienteDao {
 	
 	public void insertarActualizar(Cliente cliente);
 	
-	public void eliminar(Cliente cliente);
+	public void eliminar(Long cliente);
 
 	Cliente listarUno(long id);
 }
