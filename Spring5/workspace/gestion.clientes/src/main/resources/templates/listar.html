@@ -41,7 +41,7 @@
 				<td th:text="${c.fecNac}" />
 				<td th:text="${c.fecAlta}" />
 				<td>
-					<a th:href="@{/eliminar/} + ${c.id}" class="btn btn-danger" th:method="delete">Eliminar</a>
+					<a th:href="@{/eliminar/} + ${c.id}" class="btn btn-danger" th:method="delete" onclick="return confirm('¿Hey! estás segur@ de eliminar a est@ pav@?')">Eliminar</a>
 					<a th:href="@{/formulario/} + ${c.id}" class="btn btn-success" th:text="Modificar"></a>
 				</td>
 			</tr>
