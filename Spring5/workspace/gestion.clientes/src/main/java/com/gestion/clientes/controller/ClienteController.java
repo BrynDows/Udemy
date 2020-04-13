@@ -57,6 +57,8 @@ public class ClienteController {
 	public String guardar(@Valid Cliente cliente, BindingResult result) {
 		String pantalla = "/formulario";
 		if (!result.hasErrors()) {
+			cliente.setNombre(cliente.getNombre().toUpperCase());
+			cliente.setApellido(cliente.getApellido().toUpperCase());
 			clienteDao.insertarActualizar(cliente);
 			pantalla = "redirect:/listar";
 		}

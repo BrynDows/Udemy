@@ -3,44 +3,45 @@
 <head>
 <!-- Required meta tags -->
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
 
 <title th:text="${titulo}"></title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li><a th:href="@{/formulario}">Formulario</a></li>
-      <li><a th:href="@{/listar}">Listado</a></li>
-    </ul>
-  </div>
-</nav>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				<li><a th:href="@{/formulario}">Formulario</a></li>
+				<li><a th:href="@{/listar}">Listado</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div class="container">
 		<h1 class="well " th:text="${titulo}"></h1>
 		<form th:action="@{/insertar}" th:object="${Cliente}" method="post">
 			<input type="hidden" th:field="*{id}" />
 			<div class="row">
-				<div class="form-group col-sm-3">
-					<label for="label_nombre" class="col-form-label">Nombre</label> <input type="text"
-						class="form-control " id="input_id" placeholder="Inserte su nombre" th:field="*{nombre}">
-					<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
-						th:errors="*{nombre}"></small>
+				<div class="form-group col-sm-4">
+					<label for="label_nombre" class="col-form-label">Nombre</label> <input required type="text"
+						maxlength="20" class="form-control " id="input_id" placeholder="Inserte su nombre"
+						th:field="*{nombre}"> <small class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-3">
-					<label for="label_id">Apellido</label> <input type="text" class="form-control" id="input_id"
-						placeholder="Inserte su apellido" th:field="*{apellido}"> <small
-						class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
+
+				<div class="form-group col-sm-4">
+					<label for="label_id">Apellido</label> <input required type="text" class="form-control"
+						maxlength="20" id="input_id" placeholder="Inserte su apellido" th:field="*{apellido}">
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}"
+						th:errors="*{apellido}"></small>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-3">
-					<label for="label_id">Fecha Nacimeinto</label> <input type="text" class="form-control"
-						id="input_id" placeholder="¿Cuándo nació?" th:field="*{fecNac}"> <small
+
+				<div class="form-group col-sm-4">
+					<label for="label_id">Fecha Nacimeinto <i>(dd/mm/yyyy)</i></label> <input required type="text"
+						class="form-control" id="input_id" placeholder="¿Cuándo nació?" th:field="*{fecNac}"
+						pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])\/(0[1-9]|1[012])\/[0-9]{4}"> <small
 						class="form-text text-danger" th:if="${#fields.hasErrors('fecNac')}" th:errors="*{fecNac}"></small>
 				</div>
 			</div>
